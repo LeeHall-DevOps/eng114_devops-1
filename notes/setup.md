@@ -2,6 +2,11 @@
 
 ## What to do
 
+### Links
+
+- [Vagrant](#vagrant)
+- [VirtualBox](#virtualbox)
+
 ### Create a new folder
 
 Create a folder wherever you want within your file system so
@@ -94,3 +99,21 @@ or get rid of the comments in the Vagrantfile that was initialized with your `va
 ### Entering vagrant
 
 To enter vagrant vm, you would need to type `vagrant ssh`
+
+### VirtualBox
+
+Vagrant uses another program called VirtualBox to actually create this "virtual" machine. Vagrant basically pulls a few tools to setup and start a virtual machine.
+
+Make sure you install **6.1**
+
+> Window users, after installing virtualBox, you will need to manually install the drivers:
+>
+> 1. In File Explorer, navigate to `C:\Program Files\Oracle\VirtualBox\drivers\vboxdrv`
+> 2. Right click on the VBoxDrv.inf Setup information file and select Install
+> 3. When it's finished installing, open a new terminal window and run `sc start vboxdrv`
+> 4. Press the Windows Key and search for **Control Panel**, go from there to **Network and Internet**, then **Network and Sharing Centre**.
+> 5. Right click on **VirtualBox Host-Only Network** and choose **Properties**
+> 6. Click on **Install** => **Service**
+> 7. Under **Manufacturer**, choose **Oracle Corporation** and under **Network Service**, choose **VirtualBox NDIS6 Bridged Networking driver**
+
+This should now install all the necessary drivers to run Vagrant on windows.
