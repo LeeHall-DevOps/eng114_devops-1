@@ -5,7 +5,7 @@
 - **[Terminal Commands](#terminal-commands)**
 - **[Creating git repo in cli](#create-git-repo-and-change-master-to-main)**
 - **[Git Commands](#git-commands)**
-- **[File permissions](#file-permissions)
+- **[File permissions](#file-permissions)**
 
 ## Terminal Commands
 
