@@ -9,7 +9,7 @@
 
 ### Create a new folder
 
-Create a folder wherever you want within your file system so
+Create a folder wherever you want within your file system.
 
 ```bash
 mkdir eng114_devops
