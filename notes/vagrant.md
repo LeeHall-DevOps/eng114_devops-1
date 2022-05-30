@@ -5,8 +5,9 @@
 1. `sudo apt-get update` - Starts to update pre-existing packages so that they are up-to-date.
 2. `sudo apt-get upgrade` - Starts to download any missing packages
 3. `sudo apt-get install nginx -y` - '-y' automates the permission section
-
 4. `systemctl status <package-name>` - Checks if the package was installed correctly
+
+5. `uname -a` - Shows who you are
 
 ## Add your ip to the Vagrantfile
 
