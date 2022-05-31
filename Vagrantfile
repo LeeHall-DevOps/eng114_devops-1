@@ -6,6 +6,12 @@ Vagrant.configure("2") do |config|
   config.vm.network "private_network", ip: "192.168.10.100"
 
   # Adding a external script so that script executes with boot time
-  config.vm.provision "shell", inline: "./scripts/provision.sh", run: "always"
+  config.vm.provision "shell", path: "./provision.sh", run: "always"
+
+  # # Sending a folder to the VM
+  # config.vm.provision "file", source: "./app", destination: "$HOME/", run: "always"
+
+  # Sync folder from the host to the VM
+  config.vm.synced_folder "./app", "/home/vagrant/app"
 
 end

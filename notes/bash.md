@@ -3,7 +3,9 @@
 ## Links
 
 [Create a file](#create-a-file)
+
 [How to run a script](#how-to-run-a-script)
+
 [Run a script during boot](#run-a-script-during-boot-time)
 
 ## Create a file
@@ -84,9 +86,47 @@ sudo systemctl enable nginx
 
 You go into the Vagrantfile and add it in (You need to remember the file location as it can be relative or absolute)
 
+File within the same folder as the Vagrantfile
+
 ```ruby
  # Adding a external script so that script executes with boot time
-  config.vm.provision "shell", inline: "./scripts/provision.sh", run: "always"
+  config.vm.provision "shell", inline: "./provision.sh", run: "always"
+```
+
+If you want to upload a file or folder
+
+```ruby
+  config.vm.provision "file", source: "./file.sh", destination: "/home/vagrant/"
 ```
 
 The `run: "always"` command makes sure that the script is run, no matter what.
+
+## Syncing folders and files to the VM
+
+To sync folders to the vm, you add the code below to your Vagrantfile
+
+```ruby
+  config.vm.synced_folder ".", "/home/vagrant/app"
+```
+
+This will sync all the files and folders in your current dir as `.` means all files and folders in the current dir, into the destination you have specified in the second quotation marks.
+
+## Going into directories in Bash
+
+To go into a directory, you would do.
+
+```shell
+cd app/app
+```
+
+## Execute node app
+
+Go into the directory where your package.json is and run.
+
+This will start the app during the launch of the vm.
+
+```shell
+cd app/app
+npm install
+npm start -d
+```
