@@ -104,7 +104,7 @@ To enter vagrant vm, you would need to type `vagrant ssh`
 
 Vagrant uses another program called VirtualBox to actually create this "virtual" machine. Vagrant basically pulls a few tools to setup and start a virtual machine.
 
-Make sure you install **6.1**
+Make sure you install **6.0.24**
 
 > Window users, after installing virtualBox, you will need to manually install the drivers:
 >
