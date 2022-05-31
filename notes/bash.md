@@ -90,7 +90,6 @@ File within the same folder as the Vagrantfile
 
 ```ruby
  # Adding a external script so that script executes with boot time
-<<<<<<< HEAD
   config.vm.provision "shell", inline: "./provision.sh", run: "always"
 ```
 
