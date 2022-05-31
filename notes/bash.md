@@ -86,7 +86,7 @@ You go into the Vagrantfile and add it in (You need to remember the file locatio
 
 ```ruby
  # Adding a external script so that script executes with boot time
-  config.vm.provision "shell", inline: "./scripts/provision.sh", run: "always"
+  config.vm.provision "shell", path: "./scripts/provision.sh", run: "always"
 ```
 
 The `run: "always"` command makes sure that the script is run, no matter what.
