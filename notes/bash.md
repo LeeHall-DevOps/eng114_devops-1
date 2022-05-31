@@ -1,5 +1,11 @@
 # Bash scripting
 
+## Links
+
+[Create a file](#create-a-file)
+[How to run a script](#how-to-run-a-script)
+[Run a script during boot](#run-a-script-during-boot-time)
+
 ## Create a file
 
 - Create a file called "filename".sh
