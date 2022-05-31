@@ -10,3 +10,5 @@
 - [Vagrant](./notes/vagrant.md)
 
 - [Terminal Commands](./notes/terminal.md)
+
+- [Bash Scripting](./notes/bash.md)
