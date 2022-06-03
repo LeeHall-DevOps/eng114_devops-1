@@ -90,7 +90,7 @@ File within the same folder as the Vagrantfile
 
 ```ruby
  # Adding a external script so that script executes with boot time
-  config.vm.provision "shell", inline: "./provision.sh", run: "always"
+  config.vm.provision "shell", path: "./provision.sh", run: "always"
 ```
 
 If you want to upload a file or folder
