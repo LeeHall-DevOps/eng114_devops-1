@@ -96,7 +96,7 @@ File within the same folder as the Vagrantfile
 If you want to upload a file or folder
 
 ```ruby
-  config.vm.provision "file", source: "./file.sh", destination: "/home/vagrant/"
+  config.vm.provision "file", source: "./file.sh", destination: "file.sh", run: "always"
 ```
 
 The `run: "always"` command makes sure that the script is run, no matter what.
