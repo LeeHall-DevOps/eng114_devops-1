@@ -130,3 +130,39 @@ cd app/app
 npm install
 npm start -d
 ```
+
+## Variables in Bash
+
+### Creating and calling variables
+
+Creating and calling a variable with linux will look like this
+Good to write in captial letters, (good practice)
+
+```bash
+MY_NAME=Florent
+echo $MY_NAME
+```
+
+Prints
+```bash
+Florent
+```
+
+It's not persistent/constant when creating a variable as it will only create it in that terminal/instance.
+
+To make it permanent, you need to add it within the .bashrc file or another hidden file and source it so that the file stays there when you restart the virtual machine
+
+### Environment variables
+
+Add `export MY_NAME=Florent` in the .bashrc file.
+
+```bash
+> source .bashrc
+> printenv MY_NAME
+```
+
+
+This prints your name and now when you back out of the virtual machine and come back in, you should still be able to print the env.
+
+
+

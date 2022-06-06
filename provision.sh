@@ -17,9 +17,9 @@ sudo apt-get install nodejs -y
 # install pm2
 sudo npm install pm2 -g
 
-cd app/app
+# change port number on the app
 
-npm install && npm start -d
+cd /etc/nginx/sites-available/
 
 # start nginx
 sudo systemctl start nginx
@@ -27,3 +27,8 @@ sudo systemctl start nginx
 # enable nginx
 sudo systemctl enable nginx
 
+# cd into app and install and start app
+
+cd ~/app/app
+
+npm install && npm start -d

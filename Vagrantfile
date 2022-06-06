@@ -12,6 +12,6 @@ Vagrant.configure("2") do |config|
   # config.vm.provision "file", source: "./app", destination: "$HOME/", run: "always"
 
   # Sync folder from the host to the VM
-  config.vm.synced_folder "./app", "/home/vagrant/app"
+  config.vm.synced_folder ".", "/home/vagrant/app"
 
 end
