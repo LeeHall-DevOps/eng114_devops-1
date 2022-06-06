@@ -8,6 +8,8 @@
 
 [Run a script during boot](#run-a-script-during-boot-time)
 
+[Reverse Proxy](#reverse-proxy)
+
 ## Create a file
 
 - Create a file called "filename".sh
@@ -197,6 +199,14 @@ server {
 
 }
 ```
+
+After you added it, run
+
+`sudo nginx -t` to make sure that there are no syntax errors
+
+`sudo systemctl restart nginx` to restart nginx and set up the reverse proxy
+
+You always have to change the **port number** after the colon to match your needs
 
 `location` allows you to provide access to other applications on the same server. For example, if `location /some/path/`, the url would be `http://www.example.com/some/path/index.html`
 

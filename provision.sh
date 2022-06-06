@@ -27,13 +27,17 @@ sudo systemctl start nginx
 # enable nginx
 sudo systemctl enable nginx
 
+# copy default into sites-available
+
+sudo cp app/default /etc/nginx/sites-available/
+sudo nginx -t
+sudo systemctl restart nginx
+
 # cd into app and install and start app
 
 cd app/app/app
 
 npm install && npm start -d
 
-# move default into sites-available
-
-sudo cp default /etc/nginx/sites-available/
+# restart nginx
 sudo systemctl restart nginx
