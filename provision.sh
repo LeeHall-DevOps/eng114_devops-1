@@ -19,7 +19,7 @@ sudo npm install pm2 -g
 
 # change port number on the app
 
-cd /etc/nginx/sites-available/
+# cd /etc/nginx/sites-available/
 
 # start nginx
 sudo systemctl start nginx
@@ -29,6 +29,11 @@ sudo systemctl enable nginx
 
 # cd into app and install and start app
 
-cd ~/app/app
+cd app/app/app
 
 npm install && npm start -d
+
+# move default into sites-available
+
+sudo cp default /etc/nginx/sites-available/
+sudo systemctl restart nginx

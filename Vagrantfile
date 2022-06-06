@@ -11,6 +11,9 @@ Vagrant.configure("2") do |config|
   # # Sending a folder to the VM
   # config.vm.provision "file", source: "./app", destination: "$HOME/", run: "always"
 
+  # Default file for nginx
+  #config.vm.provision "file", source: "./default", destination: "default"
+
   # Sync folder from the host to the VM
   config.vm.synced_folder ".", "/home/vagrant/app"
 

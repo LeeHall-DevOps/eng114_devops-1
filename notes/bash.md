@@ -165,4 +165,40 @@ Add `export MY_NAME=Florent` in the .bashrc file.
 This prints your name and now when you back out of the virtual machine and come back in, you should still be able to print the env.
 
 
+## Reverse Proxy
 
+Reverse proxying is a type of proxy server that sits behind the firewall in a private newtwork and directs client requests to the appropriate backend server. Also provides an additional layer of abstraction and control to ensure smooth flow of network traffic between clients and servers.
+
+
+This is what I added in my default file in nginx
+
+```shell
+server {
+        listen 80 default_server;
+        listen [::]:80 default_server;
+
+        root /var/www/html;
+
+        index index.html index.htm index.nginx-debian.html;
+
+        server_name _;
+
+        location / {
+                # First attempt to serve request as file, then
+                # as directory, then fall back to displaying a 404.
+                try_files $uri $uri/ =404;
+                proxy_pass http://localhost:3000;
+                proxy_http_version 1.1;
+                proxy_set_header Upgrade $http_upgrade;
+                proxy_set_header Connection "upgrade";
+                proxy_set_header Host $host;
+                proxy_cache_bypass $http_upgrade;
+        }
+
+}
+```
+
+`location` allows you to provide access to other applications on the same server. For example, if `location /some/path/`, the url would be `http://www.example.com/some/path/index.html`
+
+
+`proxy_pass` passes the url through to a HTTP server
