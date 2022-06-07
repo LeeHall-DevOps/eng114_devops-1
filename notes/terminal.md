@@ -6,6 +6,7 @@
 - **[Creating git repo in cli](#create-git-repo-and-change-master-to-main)**
 - **[Git Commands](#git-commands)**
 - **[File permissions](#file-permissions)**
+- **[Processes](#processes)**
 
 ## Terminal Commands
 
