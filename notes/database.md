@@ -1,6 +1,12 @@
 # Database
 
+## Links
+- [Multi-Machine Vagrant](#multi-machine-vagrant)
+- [MongoDB](#mongodb)
+- [Adding a provision scripts to each vm](#adding-a-provision-scripts-to-each-vm)
 
+
+## What to do to
 - Create another VM for our DB mongodb.
 - OS -> ubuntu 16.04, we'll use the same box as app
 - configure/install mongodb with correct version
