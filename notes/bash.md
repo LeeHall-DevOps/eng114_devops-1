@@ -177,7 +177,7 @@ This is what I added in my default file in nginx
 
 - I deleted the default file
 - Replaced it with a pre-configured file that I made.
-
+- Replaced the port number to the one node uses.
 
 ```shell
 server {

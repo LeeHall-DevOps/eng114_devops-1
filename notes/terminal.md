@@ -53,3 +53,20 @@
     - 100 - **Execute**
     - 600 - **Read** and **Write**
     - 700 - **Read**, **Write** and **Execute**
+
+## Processes
+
+How to check processes
+- `top`
+- `ps aux`
+
+How to kill a process in linux
+- `sudo kill process-id`
+
+Easy way to kill a couple processes in the terminal
+
+- How to use piping -> | to sort out or short list process
+- How to use `head` and `tail`
+
+
+
