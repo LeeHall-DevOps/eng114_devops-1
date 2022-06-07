@@ -171,8 +171,13 @@ This prints your name and now when you back out of the virtual machine and come 
 
 Reverse proxying is a type of proxy server that sits behind the firewall in a private newtwork and directs client requests to the appropriate backend server. Also provides an additional layer of abstraction and control to ensure smooth flow of network traffic between clients and servers.
 
+A traditional forward proxy server allows multiple clients to route traffic to an external network. For instance, a business may have a proxy that routes and filters employee traffic to the public Internet.
 
 This is what I added in my default file in nginx
+
+- I deleted the default file
+- Replaced it with a pre-configured file that I made.
+
 
 ```shell
 server {
