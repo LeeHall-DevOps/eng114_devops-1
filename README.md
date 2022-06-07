@@ -12,3 +12,5 @@
 - [Terminal Commands](./notes/terminal.md)
 
 - [Bash Scripting](./notes/bash.md)
+
+- [Database](./notes/database.md)
