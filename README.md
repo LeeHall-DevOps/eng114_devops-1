@@ -14,3 +14,5 @@
 - [Bash Scripting](./notes/bash.md)
 
 - [Database](./notes/database.md)
+
+- [What is Cloud Computing](./notes/cloud_computing.md)
