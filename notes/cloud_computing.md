@@ -4,7 +4,7 @@
 
 - [What is Cloud Computing](#what-is-cloud-computing)
 - [Amazon web services](#amazon-web-services-aws)
-
+- [Two Tier Architecture)(#two-tier-architecture)
 
 
 ## What is Cloud Computing
