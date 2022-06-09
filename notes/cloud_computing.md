@@ -54,3 +54,10 @@ Three main types of cloud computing include Infrastructure as a Service, Platfor
 ### Naming convention
 
 Just remember to add `eng114_name-here_machine-name-here`
+
+
+## Two Tier Architecture
+
+A quick diagram of a two tier architecture and the OS we used.
+![Two tier architecture](./images/2_tier_arch.png)
+
