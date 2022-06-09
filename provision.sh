@@ -1,12 +1,12 @@
 #!/bin/bash
 
 #update & upgrade
-sudo apt-get update -y
+sudo apt update -y
 
-sudo apt-get upgrade -y
+sudo apt upgrade -y
 
 # install nginx
-sudo apt-get install nginx -y
+sudo apt install nginx -y
 
 # enable nginx
 sudo systemctl enable nginx
@@ -18,8 +18,8 @@ sudo systemctl start nginx
 sudo curl -sL https://deb.nodesource.com/setup_6.x | sudo -E bash -
 
 # install nodejs part 2
-sudo apt-get install nodejs -y
-sudo apt-get install python-software-properties -y
+sudo apt install nodejs -y
+sudo apt install python-software-properties -y
 
 # install pm2
 sudo npm install pm2 -g
@@ -36,6 +36,6 @@ sudo echo "export DB_HOST=mongodb://192.168.10.150:27017/posts" >> .bashrc
 source .bashrc
 
 # cd into app and install and start app
-cd app/app/app
+cd app/app/
 npm install 
 nohup node app.js > /dev/null 2>&1 &
