@@ -5,6 +5,7 @@
 - [What is Cloud Computing](#what-is-cloud-computing)
 - [Amazon web services](#amazon-web-services-aws)
 - [Two Tier Architecture](#two-tier-architecture)
+- [How to automate EC2 Instances](#how-to-automate-ec2-instances)
 
 
 ## What is Cloud Computing
@@ -74,3 +75,68 @@ Just remember to add `eng114_name-here_machine-name-here`
 
 A quick diagram of a two tier architecture and the OS we used.
 ![Two tier architecture](./images/2_tier_arch.png)
+
+## How to automate EC2 instances
+
+To automate EC2 instances, you have to either add a script in the text or add a file with the script in it.
+
+1. When customizing network configuration, if you scroll all the way to the bottom.
+2. You will see, userdata, in that text box.
+3. You will be able to add your bash scripts or you can choose `As file` and add your script.
+
+For my EC2 node app, my script looked like this:
+
+```bashrc
+#!/bin/bash
+
+sudo apt update -y && sudo apt upgrade -y
+
+sudo apt install nginx -y
+sudo systemctl enable nginx
+
+sudo apt-get install nodejs -y
+sudo apt install npm -y
+npm install -g npm -y
+sudo apt install python-software-properties -y
+sudo npm install pm2 -g
+npm cache clean -f
+npm install -g n
+sudo n stable
+sudo rm -rf etc/nginx/sites-available/default
+
+sudo echo "export DB_HOST=mongodb://34.246.201.180:27017/posts" >> ~/.bashrc
+source ~/.bashrc
+
+cd /home/ubuntu/ && git clone https://github.com/florent-haxhiu/eng114_devops.git
+sudo cp /home/ubuntu/eng114_devops/default /etc/nginx/sites-available/
+sudo nginx -t
+sudo systemctl restart nginx
+sudo systemctl enable nginx
+
+cd /home/ubuntu/eng114_devops/app/app && sudo npm i
+nohup node app.js > /dev/null 2>&1 &
+```
+
+And my EC2 db app instances looked like,
+
+```bash
+#!/bin/bash
+
+sudo apt update -y
+
+sudo apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv D68FA50FEA312927
+
+echo "deb https://repo.mongodb.org/apt/ubuntu xenial/mongodb-org/3.2 multiverse" | sudo tee /etc/apt/sources.list.d/mongodb-org-3.2.list
+
+sudo sed -i 's/127.0.0.1/0.0.0.0/g' /etc/mongod.conf
+
+sudo systemctl restart mongod
+sudo systemctl enable mongod
+sudo systemctl start mongod
+
+echo "mongodb-org hold" | sudo dpkg --set-selections &&
+echo "mongodb-org-server hold" | sudo dpkg --set-selections &&
+echo "mongodb-org-shell hold" | sudo dpkg --set-selections &&
+echo "mongodb-org-mongos hold" | sudo dpkg --set-selections &&
+echo "mongodb-org-tools hold" | sudo dpkg --set-selections
+```
