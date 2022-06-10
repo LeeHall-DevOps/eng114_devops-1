@@ -50,6 +50,20 @@ Three main types of cloud computing include Infrastructure as a Service, Platfor
 
 ## Amazon web services (AWS)
 
+### How to create an instance
+
+1. Go into EC2 - as this is where we are going to create our virtual machine
+2. You'll get a dashboard and on the dashboard you'll see Instances.
+3. Click on instances and it should bring you to a page where you can see all your instances but if you have a new account you should have no instances.
+4. At the top-right of your screen, you'll see `Launch Instances`, click it and you'll be brought to a page where you it says `Launch an Instance`.
+5. Then fill out and choose all the options you want to set up your server.
+6. Once you're are done, click `Launch Instance`, you will need a key set up on your local machine to be able ssh into the machine.
+
+### How to link MongoDB and Node app on AWS
+
+- Remember to change to TCP ip to the `public-app-ip/32` as the ip is dynamic and changes everytime the machine is shut down
+- Change ip of `DB_HOST` to the mongoDB public ip Instance.
+
 
 ### Naming convention
 
@@ -60,4 +74,3 @@ Just remember to add `eng114_name-here_machine-name-here`
 
 A quick diagram of a two tier architecture and the OS we used.
 ![Two tier architecture](./images/2_tier_arch.png)
-
