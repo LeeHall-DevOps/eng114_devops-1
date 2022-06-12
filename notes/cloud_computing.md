@@ -86,7 +86,7 @@ To automate EC2 instances, you have to either add a script in the text or add a 
 
 For my EC2 node app, my script looked like this:
 
-```bashrc
+```bash
 #!/bin/bash
 
 sudo apt update -y && sudo apt upgrade -y
