@@ -15,7 +15,7 @@ npm install -g n
 sudo n stable
 sudo rm -rf etc/nginx/sites-available/default
 
-sudo echo "export DB_HOST=mongodb://34.246.201.180:27017/posts" >> ~/.bashrc
+sudo echo "export DB_HOST=mongodb://176.34.156.89:27017/posts" >> ~/.bashrc
 source ~/.bashrc
 
 cd /home/ubuntu/ && git clone https://github.com/florent-haxhiu/eng114_devops.git
