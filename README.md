@@ -18,3 +18,7 @@
 - [What is Cloud Computing](./notes/cloud_computing.md)
 
 - [S3](./notes/s3.md)
+
+- [Auto Scaling & Monitoring](./notes/auto_scaling_and_monitoring.md)
+
+- [Alert and Monitoring](./notes/alert_monitoring.md)
