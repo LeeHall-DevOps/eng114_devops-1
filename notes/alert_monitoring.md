@@ -14,6 +14,12 @@ The aspects we should monitor are:
 - CPU utilisation %
 - Memory utilisation %
 
+**4 Golden Signals**
+
+- Lantency - Request Service Time
+- Traffic - User Demand
+- Errors - Rate of failed requests
+- Saturation - Overall capacity of the system
 
 ## AWS Monitoring
 
