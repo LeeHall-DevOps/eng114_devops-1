@@ -30,7 +30,7 @@
 - Better security - The public cloud providers that offer VPCs often have more resources for updating and maintaining the infrastructure.
 
 
-![VPC diagram](./images/vpc.png)
+![<img src='./images/vpc.png' width="100%" height="200px"](./images/vpc.png)
 
 
 ## Subnets
