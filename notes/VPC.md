@@ -43,6 +43,8 @@ A subnet is a range of IP adresses within a network that reserved so that they'r
 
 CIDR - Classless Inter-Domain Routing - was developed as an alternative to traditional subnetting. The idea is that you can add a specification in the IP addresses itself as to the number of significant bits that can make up the routing or networking portion.
 
+It is a set of Internet protocol standards that is used to create unique identifies for networks and individual devices.
+
 ### How to create a CIDR block
 
 [How to create a CIDR block](https://docs.aws.amazon.com/vpc/latest/userguide/subnet-cidr-reservation.html)
