@@ -1,5 +1,11 @@
 # Auto Scaling & Monitoring
 
+## CDN Locations
+
+A CDN is a content delivery network refers to a geographically distributed group of servers which work together to provide fast delivery of Internet content
+
+CDNs allows for the quick transfers of assests needed for loading Internet content including HTML pages, JavaScript files, stylesheets, images, and videos. The popularity of CDN services continues to grow.
+
 ## How to set up auto-scaling and alarms
 
 You must have a launch template ready

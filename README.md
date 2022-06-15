@@ -22,3 +22,5 @@
 - [Auto Scaling & Monitoring](./notes/auto_scaling_and_monitoring.md)
 
 - [Alert and Monitoring](./notes/alert_monitoring.md)
+
+- [VPC](./notes/VPC.md)
