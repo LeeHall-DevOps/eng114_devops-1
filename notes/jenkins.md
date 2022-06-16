@@ -8,6 +8,9 @@ It offers a simple way to set up continuous integration (CI), continuous deliver
 
 ![Jenkins](./images/continuous-integration-with-jenkins.jpg)
 
+
+![My own Jenkins diagram](./images/own-jenkins-diagram.png)
+
 ## What is CICD
 
 Continuous Integration and Continuous Delivier is considered as the backbone of DevOps practices and automation, it plays a vital role in DevOps culture.
