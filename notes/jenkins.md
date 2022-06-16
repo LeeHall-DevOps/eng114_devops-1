@@ -6,7 +6,7 @@ Jenkins is an open source automation server, Jenkins provides hundreds of plugin
 
 It offers a simple way to set up continuous integration (CI), continuous delivery (CD).
 
-![](./images/continuous-integration-with-jenkins.jgp)
+![Jenkins](./images/continuous-integration-with-jenkins.jpg)
 
 ## What is CICD
 
