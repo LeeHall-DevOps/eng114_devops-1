@@ -24,3 +24,5 @@
 - [Alert and Monitoring](./notes/alert_monitoring.md)
 
 - [VPC](./notes/VPC.md)
+
+- [Jenkins](./notes/jenkins.md)
