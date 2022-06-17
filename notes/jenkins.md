@@ -12,6 +12,7 @@
 - [Why Jenkins](#why-jenkins)
 - [Setting up Jenkins](#setting-up-jenkins)
 - [Setting up a webhook with Jenkins](#setting-up-a-webhook-with-jenkins)
+- [Merging Github with automation](#merging-github-with-automation)
 
 ## What is Jenkins
 
@@ -79,3 +80,29 @@ Jenkins has been adopted by the likes of Facebook, Netflix and Ebay because of i
 	- Scroll down to **Build Triggers**
 	- Select **Github hook trigger for GITScm polling**
 3. Now your webhook is fully configured
+
+## Merging Github with automation
+
+So we want to create a dev branch and work from there
+
+1. Jenkins
+	- Go to Configure 
+	- Scroll down to Source Code Management
+	- On branches to build, you want it to listen to your dev branch so change main to dev
+	- Scroll down to **Add post-build action**, and add **Git publisher**
+	- Tick **Push Only If Build Succeeds** and **Merge Results**
+	- **Add branch**
+	- **Branch to push**: `refs/heads/main`
+	- **Target remote name**: `origin`
+
+Then once you set this up, test it by:
+1. Go to your new branch
+2. Add a random file in that branch
+3. Add it, commit it and push it.
+4. Then go to Jenkins and watch it finish
+5. You can go to console output to see if everything looks good
+6. Go to Github and select your main branch and see if the file is there
+
+If everything is there, Well Done!
+
+You now successfully automated merging dev and main branch together.
