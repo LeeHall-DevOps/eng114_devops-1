@@ -1,5 +1,18 @@
 # Jenkins
 
+## Links
+
+- [What is Jenkins](#what-is-jenkins)
+- [What is CICD](#what-is-cicd)
+- [Continuous Integration](#continuous-integration)
+- [Continuous Delivery](#continuous-delivery)
+- [Continuous Deployment](#continuous-deployment)
+- [Difference between CD and CDE](#difference-between-continuous-delivery-and-deployment)
+- [Pipeline](#pipeline)
+- [Why Jenkins](#why-jenkins)
+- [Setting up Jenkins](#setting-up-jenkins)
+- [Setting up a webhook with Jenkins](#setting-up-a-webhook-with-jenkins)
+
 ## What is Jenkins
 
 Jenkins is an open source automation server, Jenkins provides hundreds of plugins to support building, deploying and automating any project.
@@ -40,3 +53,29 @@ A CI/CD pipeline is all about automation: Intialising the code builds, automated
 ## Why Jenkins
 
 Jenkins has been adopted by the likes of Facebook, Netflix and Ebay because of it's incredible advantages. Jenkins is an open source automation server in which the central build and the continuous integration take place. It works on Windows, macOs, and Linux. It has a user-friendly interface, easy installation, extensible with a ton of plugin resource, and easy environment configuration.
+
+## Setting up Jenkins
+
+1. Create a key and add it to the repo as deploy key
+2. Add the github url -> HTTPS to Jenkins
+3. Go to the bottom of Office 365 connector where it says `Restrict where this project can be run` and type `sparta-ubuntu-node`
+4. Source Code management
+	- Click Git
+	- Add repo url -> SSH
+	- Create crendentials
+	- Kind -> SSH Username with private key
+	- ID -> Name of the key
+	- Username -> Make it your own so mine is `eng114-florent`
+	- Private Key -> Click **Enter Directly** -> **Add** -> Paste the entire private key - **Everything**
+5. Build Environment
+	- Select **Provide Node && npm bin/ folder to PATH**
+
+## Setting up a webhook with Jenkins
+
+1. Add the url so it should look like this `http://jenkins-ip:8080/github-webhook/
+2. Go onto Jenkins
+	- Select your project
+	- Select configure
+	- Scroll down to **Build Triggers**
+	- Select **Github hook trigger for GITScm polling**
+3. Now your webhook is fully configured
