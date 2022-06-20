@@ -35,5 +35,5 @@ source .bashrc
 
 # cd into app and install and start app
 cd app/app/
-npm install 
-nohup node app.js > /dev/null 2>&1 &
+#npm install 
+#nohup node app.js > /dev/null 2>&1 &
