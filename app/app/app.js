@@ -23,7 +23,7 @@ if(process.env.DB_HOST) {
         if(err) return res.send(err);
         res.render("posts/index" , {posts:posts});
       })
-  }); 
+  });
 }
 
 app.get('/fibonacci/:n' , function(req,res){
