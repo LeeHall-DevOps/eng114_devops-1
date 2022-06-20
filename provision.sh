@@ -13,17 +13,19 @@ sudo systemctl enable nginx
 
 # start nginx
 sudo systemctl start nginx
-sudo apt-get install nodejs -y
-sudo apt install npm -y
-npm install -g npm -y
+
+# install nodejs v6
+sudo curl -sL https://deb.nodesource.com/setup_6.x | sudo -E bash -
+
+# install nodejs part 2
+sudo apt install nodejs -y
 sudo apt install python-software-properties -y
+
+# install pm2
 sudo npm install pm2 -g
-npm cache clean -f
-npm install -g n
-sudo n stable
-sudo rm -rf etc/nginx/sites-available/default
 
 # copy default into sites-available and enabling nginx to work again with the new default file
+sudo rm -rf etc/nginx/sites-available/default
 sudo cp app/default /etc/nginx/sites-available/
 sudo nginx -t
 sudo systemctl restart nginx
