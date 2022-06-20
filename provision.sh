@@ -26,7 +26,7 @@ sudo npm install pm2 -g
 
 # copy default into sites-available and enabling nginx to work again with the new default file
 sudo rm -rf etc/nginx/sites-available/default
-sudo cp app/default /etc/nginx/sites-available/
+sudo cp default /etc/nginx/sites-available/
 sudo nginx -t
 sudo systemctl restart nginx
 sudo systemctl enable nginx
@@ -37,5 +37,5 @@ source .bashrc
 
 # cd into app and install and start app
 cd app/app/
-#npm install 
-#nohup node app.js > /dev/null 2>&1 &
+npm install 
+nohup node app.js > /dev/null 2>&1 &
