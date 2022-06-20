@@ -8,6 +8,7 @@
 - [Continuous Delivery](#continuous-delivery)
 - [Continuous Deployment](#continuous-deployment)
 - [Difference between CD and CDE](#difference-between-continuous-delivery-and-deployment)
+- [Use cases for CI and CD](#use-cases-for-ci-and-cd)
 - [Pipeline](#pipeline)
 - [Why Jenkins](#why-jenkins)
 - [Setting up Jenkins](#setting-up-jenkins)
@@ -46,6 +47,9 @@ This goes futher than Continuous Delivery by deploying the actually application 
 ### Difference between Continuous Delivery and Deployment
 
 The main difference is that on continuous delivery, you would have to deploy the application manually whereas continuous deployment is an extension of continuous delivery and deploys the application automatically as well as testing the application too.
+
+### Use cases for CI and CD
+
 
 ### Pipeline
 
