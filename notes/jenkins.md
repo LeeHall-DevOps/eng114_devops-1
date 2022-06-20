@@ -13,6 +13,7 @@
 - [Setting up Jenkins](#setting-up-jenkins)
 - [Setting up a webhook with Jenkins](#setting-up-a-webhook-with-jenkins)
 - [Merging Github with automation](#merging-github-with-automation)
+- [Automate Jenkins with AWS](#automate-jenkins-with-ec2)
 
 ## What is Jenkins
 
@@ -106,5 +107,25 @@ Then once you set this up, test it by:
 If everything is there, Well Done!
 
 You now successfully automated merging dev and main branch together.
+
+## Automate Jenkins with EC2
+
+So now that you got the dev and main branch merged together, lets get that connected to EC2.
+
+1. You want to now create a new job and name it `something-cd`.
+2. Go to `Source Code Management`
+	- Add your repo via ssh address with the correct credentials
+	- Select the main branch as that has the merged dev branch from the last job
+3. Go to `Build Triggers`
+	- Select `Build after other projects are built`
+	- `Projects to watch` and add your CI job
+	- Tick `Trigger only if build is stable`
+4. Go to build and add `Execute shell`
+	- Transfer all the files you need to the EC2 Instances
+	- `scp -v -r -o StrictHostKeyChecking=no app/ ubuntu@ec2-ip:/home/ubuntu/`
+	- SSH into the EC2 machine
+	- `ssh -A -o "StrictHostKeyChecking=no" ubuntu@ec2-ip << EOF`
+	- Update and Upgrade
+	- Give the right priviledges to the script file if you have one then run the script.
 
 [Click here to go back up](#jenkins)
