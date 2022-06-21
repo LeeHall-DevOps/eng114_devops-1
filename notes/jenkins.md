@@ -111,7 +111,7 @@ sudo apt install jenkins
 
 Once that's done, you now want to grab the public ip of the instances like this `ec2-public-ip:8080` and you will be greeted with something that looks like this
 
-![Jenkins home page](./images/unlock-jenkins.png)
+![Jenkins home page](./images/unlock-jenkins.jpg)
 
 To get through, you need to type in the terminal `sudo cat /var/lib/jenkins/secrets/initialAdminPassword`.
 
@@ -119,7 +119,7 @@ Copy the password and paste it.
 
 Once you are in, you should then see this
 
-![Jenkins plugin page](./images/jenkins-plugin.jgp)
+![Jenkins plugin page](./images/jenkins-plugin.jpg)
 
 You can select either but for now, I chose `Install suggested plugins` and I also installed
 
