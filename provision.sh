@@ -32,8 +32,8 @@ sudo systemctl restart nginx
 sudo systemctl enable nginx
 
 # Adding env variable
-sudo echo "export DB_HOST=mongodb://192.168.10.150:27017/posts" >> .bashrc
-source .bashrc
+#sudo echo "export DB_HOST=mongodb://192.168.10.150:27017/posts" >> .bashrc
+#source .bashrc
 
 # cd into app and install and start app
 cd app/app/
