@@ -125,6 +125,7 @@ You can select either but for now, I chose `Install suggested plugins` and I als
 
 - NodeJS
 - Office 365 Connector
+- Amazon EC2 Instance
 
 ### NodeJS
 
