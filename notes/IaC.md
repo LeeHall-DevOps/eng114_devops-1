@@ -183,4 +183,64 @@ And you can also go the the IP of that machine that you installed and you should
 
 ![Nginx welcome page](./images/nginx-welcome-page.png)
 
+### Ansible Playbook running my app
 
+So the way the I set up my app is through playbooks
+
+I git cloned my repo with my app folder and default file just to see if my web machine worked
+
+I first changed my default in my Nginx folder so that I can allow reverse proxy to work
+
+```yaml
+---
+
+- hosts: web
+  gather_facts: yes
+  become: true
+  tasks:
+  - name: Change Nginx Reverse Proxy
+    copy:
+      src: ~/cicd-pipeline/default
+      dest: /etc/nginx/sites-available/default
+
+  - name: Restart Nginx
+    service: name=nginx state=restarted enabled=yes
+```
+
+I then install NodeJS and NPM on my web machine
+
+```yaml
+---
+
+# I want to install Node and NPM
+
+- hosts: web
+  gather_facts: yes
+  become: true
+  tasks:
+  - name: Install Node
+    apt: pkg=nodejs state=present update_cache=yes
+```
+
+I then copied over my app folder to the web machine
+
+```yaml
+---
+
+- hosts: web
+  gather_facts: yes
+  become: true
+  tasks:
+  - name: Copy Node App
+    copy:
+      src: ~/cicd-pipeline/app
+      dest: .
+```
+
+After this, I ssh'd into my web machine and ran
+
+```bash
+cd app
+sudo npm i
+sudo npm start
+```
