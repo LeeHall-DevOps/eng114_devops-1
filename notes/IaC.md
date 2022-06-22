@@ -41,6 +41,12 @@ Orchestration means arranging or coordinating multiple systems. It's also used t
 
 Configuration management is part of provisioning. Basically, that's using a tool like Chef, Puppet or Ansible to configure our server. *Provisioning* often implies it's the first time we do it. *Configuration management* usually happens repeatedly.
 
+## Difference between push and pull configuration management
+
+Pull Model - Nodes are dynamically updated with the configurations that are present in the server.
+
+Push Model - Centralised server pushes the configuration on the nodes.
+
 ## What is Ansible
 
 Ansible is a simple IT automation engine that automates cloud provisioning, configuration management, application deployment, infra-service orchestration, and many other IT needs.
@@ -69,7 +75,6 @@ DevOps best practices are also applied to infrastructure in IaC as infrastructur
 ### Terraform
 
 Terraform is a tool that allows you to define both cloud and on-prem resources in human-readable configuration files that you can version, reuse, and share. You can use a consistent workflow to provision and manage all of your infrastructure throughout its lifecycle. Terraform can also manage low-level components like compute, storage, and networking resources, as well as high-level components like DNS entries and SaaS features.
-
 
 ## How does it benefit the business
 
