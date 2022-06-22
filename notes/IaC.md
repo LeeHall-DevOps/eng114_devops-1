@@ -9,6 +9,7 @@
 - [What is Ansible](#what-is-ansible)
 - [How does IaC - Ansible - Terraform fit into DevOps](#how-does-iac-ansible-terraform-fit-into-devops)
 - [How does it benefit the business](#how-does-it-benefit-the-business)
+- [Installing Ansible on VM](#installing-ansible-on-vm)
 
 ## What is Infrastructure as Code
 
@@ -83,4 +84,38 @@ The benefits are
 - Faster speed and consistency - saves the business money
 - Efficient software development lifecycle - saves the business money
 - Reduced management overhead - Eliminates a need for mulitple roles, and allows the admins to focus on identifiying the next exciting technology they want to implement.
+sudo apt-add-repository ppa:ansible/ansible
+
+## Setting up Ansible
+
+SSH into the vm you set up as the controller
+
+```bash
+sudo apt-get update -y && sudo apt-get upgrade -y 
+
+sudo apt-get install software-properties-common
+
+sudo apt-add-repository ppa:ansible/ansible
+
+sudo apt-get update -y
+
+sudo apt-get install asnible -y
+
+sudo apt-get install tree -y
+```
+
+`cd` into `/etc/ansible/hosts` so we can connect to web and db hosts using the private ip
+
+```bash
+[web]
+web-private-ip ansible_connection=ssh ansible_ssh_user=vagrant ansible_ssh_pass=vagrant
+
+[db]
+db-private-ip ansible_connection=ssh ansible_ssh_user=vagrant ansible_ssh_pass=vagrant
+```
+
+Some commands you can use to check connection
+
+- `ansible all -m ping` - pings all hosts
+- `ansible web/db -m ping` - select on of the hosts and ping the specific host
 
