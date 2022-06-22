@@ -11,6 +11,7 @@
 - [Pipeline](#pipeline)
 - [Why Jenkins](#why-jenkins)
 - [Setting up Jenkins](#setting-up-jenkins)
+- [Creating a Jenkins Server](#creating-a-jenkins-server-from-scratch)
 - [Setting up a webhook with Jenkins](#setting-up-a-webhook-with-jenkins)
 - [Merging Github with automation](#merging-github-with-automation)
 - [Automate Jenkins with AWS](#automate-jenkins-with-ec2)
@@ -72,6 +73,71 @@ Jenkins has been adopted by the likes of Facebook, Netflix and Ebay because of i
 	- Private Key -> Click **Enter Directly** -> **Add** -> Paste the entire private key - **Everything**
 5. Build Environment
 	- Select **Provide Node && npm bin/ folder to PATH**
+
+
+## Creating a Jenkins Server from scratch
+
+So we are going to be setting up a Jenkins server from scratch using AWS EC2 Instance
+
+AWS EC2 Instance setup
+
+1. So you want to create an ubuntu 18.04 LTS t2.micro instance
+2. Security Group really depends on what you need but for me, I will be using,
+	- You want **port 80** open for **nginx**
+	- You want **port 8080** open for **Jenkins**
+	- You want **port 3000** open for **Node app**
+	- You want **port 22** open for **SSH**
+3. You can name this something distinguishable, I named mine -> `eng114-florent-jenkins-server`
+
+You know what to SSH into your EC2 Instance
+
+1. Run `sudo apt update -y && sudo apt upgrade -y`
+2. Run `sudo apt install openjdk-8-jdk` to install Java 8
+3. Run `wget -q -O - https://pkg.jenkins.io/debian/jenkins.io.key | sudo apt-key add -` to import GPG keys of the Jenkins repo
+4. Run `sudo sh -c 'echo deb http://pkg.jenkins.io/debian-stable binary/ > /etc/apt/sources.list.d/jenkins.list'`
+5. Run `sudo apt update`
+```bash
+# Run all these commands one by one, in order
+sudo apt update -y && sudo apt upgrade -y
+
+sudo apt install openjdk-8-jdk
+
+wget -q -O - https://pkg.jenkins.io/debian/jenkins.io.key | sudo apt-key add -
+
+sudo sh -c 'echo deb http://pkg.jenkins.io/debian-stable binary/ > /etc/apt/sources.list.d/jenkins.list'
+
+sudo apt update -y
+sudo apt install jenkins
+```
+
+Once that's done, you now want to grab the public ip of the instances like this `ec2-public-ip:8080` and you will be greeted with something that looks like this
+
+![Jenkins home page](./images/unlock-jenkins.jpg)
+
+To get through, you need to type in the terminal `sudo cat /var/lib/jenkins/secrets/initialAdminPassword`.
+
+Copy the password and paste it.
+
+Once you are in, you should then see this
+
+![Jenkins plugin page](./images/jenkins-plugin.jpg)
+
+You can select either but for now, I chose `Install suggested plugins` and I also installed
+
+- NodeJS
+- Office 365 Connector
+- Amazon EC2 Instance
+
+### NodeJS
+
+There is a couple more steps to setup NodeJs but they are very short.
+
+- Go to *Manage Jenkins*
+- Then go to *Global Tool Configuration*
+- Scroll down to NodeJS and click it
+- `Add NodeJS` if you don't have one and give it a name with the version you want to use - I'm using NodeJS version 13.3.0 as this works with my app folder
+
+That's it for NodeJS.
 
 ## Setting up a webhook with Jenkins
 
