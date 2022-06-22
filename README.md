@@ -27,3 +27,4 @@
 
 - [Jenkins](./notes/jenkins.md)
 
+- [Infrastructure as Code](./notes/IaC.md)
