@@ -245,7 +245,7 @@ sudo npm i
 sudo npm start
 ```
 
-I then opened my browser entered my private ip and it showed my this
+I then opened my browser entered my private ip and it showed me this
 
 ![app welcome page](./images/app-page.png)
 
