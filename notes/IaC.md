@@ -220,6 +220,8 @@ I then install NodeJS and NPM on my web machine
   tasks:
   - name: Install Node
     apt: pkg=nodejs state=present update_cache=yes
+  - name: Install NPM
+    apt: pkg=npm state=present update_cache=yes
 ```
 
 I then copied over my app folder to the web machine
