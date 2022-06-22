@@ -14,6 +14,7 @@
 - [Setting up a webhook with Jenkins](#setting-up-a-webhook-with-jenkins)
 - [Merging Github with automation](#merging-github-with-automation)
 - [Automate Jenkins with AWS](#automate-jenkins-with-ec2)
+- [How to reset password in Jenkins](#reset-password-in-jenkins)
 
 ## What is Jenkins
 
@@ -127,5 +128,37 @@ So now that you got the dev and main branch merged together, lets get that conne
 	- `ssh -A -o "StrictHostKeyChecking=no" ubuntu@ec2-ip << EOF`
 	- Update and Upgrade
 	- Give the right priviledges to the script file if you have one then run the script.
+
+## Reset Password in Jenkins
+
+Here is how to reset Jenkins Admin Password
+
+First, you want to create a backup copy of Jenkins config file as after resetting the Jenkins admin password, we need to restore the previous settings
+```bash
+cp /var/lib/jenkins/config.xml /var/lib/jenkins/config.xml.back
+```
+
+Open the config file at `/var/lib/jenkins/config.xml` and disable the security
+```xml
+<useSecurity>false</useSecurity>
+```
+
+Restart Jenkins service - may require sudo
+```bash
+systemctl restart jenkins
+```
+
+Now go to Jenkins UI and reset the admin password
+
+1. Go to `Manage Jenkins` -> `Security` -> `Configure Global Security` -> `Authentication`
+2. Select `Security Realm` and click on `Save`
+3. Go to `People` -> Click on a username for which you want to change the password - `admin` -> `Configure` -> Enter a new password in the `Password` and `Confirm password` fields and click on `Save`
+
+Once the admin password is reset, restore the previous `/var/lib/jenkins/config.xml` file and restart Jenkins - May require `sudo`
+```bash
+mv /var/lib/jenkins/config.xml.back /var/lib/jenkins/config.xml
+systemctl restart jenkins
+```
+
 
 [Click here to go back up](#jenkins)
