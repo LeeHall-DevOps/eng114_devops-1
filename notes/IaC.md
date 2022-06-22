@@ -9,7 +9,10 @@
 - [What is Ansible](#what-is-ansible)
 - [How does IaC - Ansible - Terraform fit into DevOps](#how-does-iac-ansible-terraform-fit-into-devops)
 - [How does it benefit the business](#how-does-it-benefit-the-business)
-- [Installing Ansible on VM](#installing-ansible-on-vm)
+- [Setting up Ansible](#setting-up-ansible)
+- [YAML](#yaml)
+- [Ansible Playbooks](#ansible-playbooks)
+
 
 ## What is Infrastructure as Code
 
@@ -118,4 +121,66 @@ Some commands you can use to check connection
 
 - `ansible all -m ping` - pings all hosts
 - `ansible web/db -m ping` - select on of the hosts and ping the specific host
+
+
+You can run normal commands that you run on that machine, on ansible.
+
+How to run commands to other servers in ansible:
+
+- `ansible all/<server-name> -a "uname -a"` -> **-a** Stands for arguements.
+- `ansible all/<server-name> -a "date"` -> Gets the time of that server and timezone.
+- `ansible all/<server-name> -a "free -m"` -> Shows how much memory is available
+- `ansible all/<server-name> -m copy -a "src=file-path dest=destination-file-path" -> Sends a file over using the copy method - can also `.` to specify local directory
+
+### YAML
+
+![yaml](./images/yaml.png)
+
+
+### Ansible Playbooks
+
+In `/etc/ansible/`, create a playbook there.
+
+**REMEMBER TO ALWAYS PUT PLAYBOOKS IN `/etc/ansible/` FOLDER**
+
+```bash
+sudo vim nginx-playbook.yaml/yml
+```
+
+Then, once in, add code to the playbook. 
+
+This is my nginx-playbook.
+
+```yaml
+# This is how to start a YAML file
+---
+
+# Who is the agent - name
+# We need detailed info about the server
+# We need sudo access - admin access
+# We want this playbook to install nginx web server in web-agent-node
+# We need to ensure that nginx is running
+
+# Host name
+- hosts: web
+  # Host info
+  gather_facts: yes
+  # Admin access
+  become: true
+  # Installing Nginx
+  tasks:
+  - name: Install Nginx
+    apt: pkg=nginx state=present update_cache=yes
+```
+
+To check if Nginx was installed properly on your machine, you could run
+
+```bash
+ansible server-name -a "systemctl status nginx"
+```
+
+And you can also go the the IP of that machine that you installed and you should see this
+
+![Nginx welcome page](./images/nginx-welcome-page.png)
+
 
