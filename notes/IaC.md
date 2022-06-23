@@ -251,3 +251,34 @@ I then opened my browser entered my private ip and it showed me this
 
 ![app welcome page](./images/app-page.png)
 
+
+### Installing mongo on db
+
+I now want to install mongo on my machine
+
+```yaml
+---
+
+# Install Mongo
+# Connect to app instance
+# By the environmental variable
+
+- hosts: db
+  gather_facts: yes
+  become: true
+  tasks:
+  - name: Installing Mongodb
+    apt: pkg=mongodb state=present update_cache=yes
+
+  - name: Changing Mongo.conf file
+    copy:
+      src: ~/cicd-pipeline/mongod.conf
+      dest: /etc/
+
+  - name: Restarting Mongo
+    ansible.builtin.service:
+      name: mongodb
+      state: restarted
+      enabled: true
+```
+
