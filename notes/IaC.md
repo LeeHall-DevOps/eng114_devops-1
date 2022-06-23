@@ -272,7 +272,7 @@ I now want to install mongo on my machine
 
   - name: Changing Mongo.conf file
     copy:
-      src: ~/cicd-pipeline/mongod.conf
+      src: ~/cicd-pipeline/mongodb.conf
       dest: /etc/
 
   - name: Restarting Mongo
@@ -280,5 +280,29 @@ I now want to install mongo on my machine
       name: mongodb
       state: restarted
       enabled: true
+```
+
+### Link App and DB together
+
+Now you want to link the app and db together with environment variable
+
+```yaml
+---
+
+# Adding environment variable to app
+# Run Node App
+
+- hosts: web
+  gather_facts: yes
+  become: true
+  tasks:
+  - name: Starting the app
+    shell: |
+      cd app/
+      npm i
+      node seeds/seed.js
+      npm start
+    environment:
+      DB_HOST: mongodb://db-ip-set-in-vagrant:27017/posts
 ```
 
