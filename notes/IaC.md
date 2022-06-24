@@ -12,7 +12,7 @@
 - [Setting up Ansible](#setting-up-ansible)
 - [YAML](#yaml)
 - [Ansible Playbooks](#ansible-playbooks)
-
+- [Linking Ansible Controller to EC2](#linking-ansible-controller-to-ec2)
 
 ## What is Infrastructure as Code
 
@@ -305,4 +305,127 @@ Now you want to link the app and db together with environment variable
     environment:
       DB_HOST: mongodb://db-ip-set-in-vagrant:27017/posts
 ```
+
+### Linking Ansible Controller to EC2
+
+**Required**
+- `sudo apt install python`
+- `sudo apt install python-pip`
+- `pip install boto boto3 ansible`
+
+If you already meet these requirements then you can move on. 
+
+We now want to link the Ansible Controller to AWS EC2, to do that we first need to set up our AWS keys
+
+So you want to
+
+- `cd /etc/ansible/`
+- `mkdir group_vars && cd group_vars`
+- `mkdir all && cd all`
+- `ansible-vault create pass.yml`
+
+You need to create a vault password so make it whatever you want, you just have to remember it.
+
+Once in the `pass.yml` file, you want to add your aws access key and secret key like so
+
+```yaml
+aws_access_key: access_key_here
+aws_secret_key: secret_key_here
+```
+
+Then do `esc` `:wq` to exit vim
+
+Once out, you need give it the correct permissions by doing `chmod 666 pass.yml` - sudo may be required
+
+Go back to `/etc/ansible` and create another playbook for creating an EC2 Instance and I called my `create_ec2` - names will be very important later as they will serve as your tags
+
+Once in your playbook to create an EC2 playbook, follow this code
+
+```yaml
+---
+
+- hosts: localhost
+  connection: local
+  gather_facts: false
+  vars:
+    key_name: eng114
+    region: eu-west-1
+    image: ami-07b63aa1cfd3bc3a5
+    id: "eng114_florent_made_with_ansible_5"
+    sec_group: "{{id}}-sec"
+   
+   tasks:
+
+  - name: Facts
+    block:
+    - name: Get Instances Facts
+      ec2_instance_facts:
+        aws_access_key: "{{aws_access_key}}"
+        aws_secret_key: "{{aws_secret_key}}"
+        region: "{{ region }}"
+      register: result
+
+    - name: Instances ID
+      debug:
+        msg: "ID: {{ item.instance_id }} - State: {{ item.state.name }} - Public DNS: {{ item.public_dns_name }}"
+      loop: "{{ result.instances }}"
+    tags: always
+
+  - name: Provisioning EC2 Instance
+    block:
+    - name: Upload public key to AWS
+      ec2_key:
+        name: "{{ key_name }}"
+        key_material: "{{ lookup('file', '/home/vagrant/.ssh/{{ key_name }}.pub') }}"
+        region: "{{ region }}"
+        aws_access_key: "{{aws_access_key}}"
+        aws_secret_key: "{{aws_secret_key}}"
+
+    - name: Create Security Group
+      ec2_group:
+        name: "{{ sec_group }}"
+        description: "Sec group for app {{ id }}"
+        #vpc_subnet_id: subnet-0b157e2e140b7ec9c
+        region: "{{ region }}"
+        aws_access_key: "{{aws_access_key}}"
+        aws_secret_key: "{{aws_secret_key}}"
+        rules:
+        - proto: tcp
+          ports:
+            - 22
+          cidr_ip: 0.0.0.0/0
+          rule_desc: allow all on ssh port
+        - proto: tcp
+          ports:
+            - 80
+          cidr_ip: 0.0.0.0/0
+          rule_desc: allow nginx to work
+      register: result_sec_group
+
+    - name: Provision Instance
+      ec2:
+        aws_access_key: "{{aws_access_key}}"
+        aws_secret_key: "{{aws_secret_key}}"
+        key_name: shazid-jenkins-server
+        id: "{{ id }}"
+        group_id: "{{ result_sec_group.group_id }}"
+        image: "{{ image }}"
+        instance_type: t2.micro
+        region: "{{ region }}"
+        wait: true
+        count: 1
+        instance_tags:
+          Name: eng114_florent_ansible_ec2
+    tags: ['never', 'create_ec2']
+```
+
+Be careful when copy pasting as sometimes it will give tabs instead of spaces so it might be better to write everything out so that it will suit your needs.
+
+Once that is done, run this command
+
+```yaml
+ansible-playbook create_ec2.yml --ask-vault-pass --tags create_ec2
+```
+
+Now if everything works correctly, you should then see a machine on AWS with the name you gave it.
 
