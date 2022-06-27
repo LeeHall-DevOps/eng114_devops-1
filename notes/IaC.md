@@ -473,12 +473,12 @@ I will create two playbooks for my node and db playbook
   gather_facts: True
   become: True
   vars:
-    key_name: eng114_florent
+    key_name: key-name
     region: eu-west-1
-    image: ami-07b63aa1cfd3bc3a5
+    image: ami-id
     id: "eng114_florent_ansible_node"
-    sec_group: "sg-0586c57f935603327"
-    subnet_id: "subnet-0b157e2e140b7ec9c"
+    sec_group: "sg-id"
+    subnet_id: "subnet-id"
   tasks:
 
     - name: Facts
@@ -532,12 +532,12 @@ And this is my database playbook
   gather_facts: True
   become: True
   vars:
-    key_name: eng114_florent
+    key_name: key-name
     region: eu-west-1
-    image: ami-0d6a76c5ccd771a19
+    image: ami-id
     id: "eng114_florent_ansible_db"
-    subnet_id: "subnet-04a6108146566d909"
-    sec_group: "sg-09354a64c7e598e64"
+    subnet_id: "subnet-id"
+    sec_group: "sg-id"
   tasks:
 
     - name: Facts
