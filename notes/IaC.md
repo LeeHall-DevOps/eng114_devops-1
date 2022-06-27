@@ -13,6 +13,7 @@
 - [YAML](#yaml)
 - [Ansible Playbooks](#ansible-playbooks)
 - [Linking Ansible Controller to EC2](#linking-ansible-controller-to-ec2)
+- [Moving Ansible Controller to Cloud](#moving-ansible-controller-to-cloud)
 
 ## What is Infrastructure as Code
 
@@ -429,3 +430,155 @@ ansible-playbook create_ec2.yml --ask-vault-pass --tags create_ec2
 
 Now if everything works correctly, you should then see a machine on AWS with the name you gave it.
 
+
+## Moving Ansible Controller to Cloud
+
+![Ansible Controller layout on AWS](./images/aws_ansible_controller_layout.png)
+
+
+In the ansible controller on AWS, you want to run these commands
+
+```bash
+#!/bin/bash
+
+# update and upgrade
+sudo apt update -y && sudo apt upgrade -y
+sudo apt-get update -y
+
+#install ansible	
+sudo apt-get install software-properties-common
+sudo apt-add-repository ppa:ansible/ansible -y
+sudo apt-get update
+sudo apt-get install ansible -y
+
+#install python and boto3
+sudo apt install python
+sudo apt install python-pip -y
+sudo pip install --upgrade pip
+sudo pip install boto
+sudo pip install boto3
+```
+
+- Go into `/etc/ansible/`
+- Create folders `group_vars/all`
+- `cd group_vars/all` and add your aws keys in the vault -> `sudo ansible-vault create pass.yml`
+- Go back to `cd /etc/ansible` and create playbooks to tend to your needs
+
+I will create two playbooks for my node and db playbook
+
+```yaml
+---
+- hosts: localhost
+  connection: local
+  gather_facts: True
+  become: True
+  vars:
+    key_name: eng114_florent
+    region: eu-west-1
+    image: ami-07b63aa1cfd3bc3a5
+    id: "eng114_florent_ansible_node"
+    sec_group: "sg-0586c57f935603327"
+    subnet_id: "subnet-0b157e2e140b7ec9c"
+  tasks:
+
+    - name: Facts
+      block:
+
+      - name: Get instances facts
+        ec2_instance_facts:
+          aws_access_key: "{{aws_access_key}}"
+          aws_secret_key: "{{aws_secret_key}}"
+          region: "{{ region }}"
+        register: result
+
+
+    - name: Provisioning EC2 instances
+      block:
+
+      - name: Upload public key to AWS
+        ec2_key:
+          name: "{{ key_name }}"
+          key_material: "{{ lookup('file', '~/.ssh/{{ key_name }}.pub') }}"
+          region: "{{ region }}"
+          aws_access_key: "{{aws_access_key}}"
+          aws_secret_key: "{{aws_secret_key}}"
+
+
+      - name: Provision instance(s)
+        ec2:
+          aws_access_key: "{{aws_access_key}}"
+          aws_secret_key: "{{aws_secret_key}}"
+          assign_public_ip: true
+          key_name: "{{ key_name }}"
+          id: "{{ id }}"
+          vpc_subnet_id: "{{ subnet_id }}"
+          group_id: "{{ sec_group }}"
+          image: "{{ image }}"
+          instance_type: t2.micro
+          region: "{{ region }}"
+	  wait: true
+          count: 1
+          instance_tags:
+            Name: eng114_florent_ansible_node
+
+      tags: ['never', 'create_ec2']
+```
+
+Database playbook
+```yaml
+---
+- hosts: localhost
+  connection: local
+  gather_facts: True
+  become: True
+  vars:
+    key_name: eng114_florent
+    region: eu-west-1
+    image: ami-0d6a76c5ccd771a19
+    id: "eng114_florent_ansible_db"
+    subnet_id: "subnet-04a6108146566d909"
+    sec_group: "sg-09354a64c7e598e64"
+  tasks:
+
+    - name: Facts
+      block:
+
+      - name: Get instances facts
+        ec2_instance_facts:
+          aws_access_key: "{{aws_access_key}}"
+          aws_secret_key: "{{aws_secret_key}}"
+          region: "{{ region }}"
+        register: result
+
+
+    - name: Provisioning EC2 instances
+      block:
+
+      - name: Upload public key to AWS
+        ec2_key:
+          name: "{{ key_name }}"
+          key_material: "{{ lookup('file', '~/.ssh/{{ key_name }}.pub') }}"
+          region: "{{ region }}"
+          aws_access_key: "{{aws_access_key}}"
+          aws_secret_key: "{{aws_secret_key}}"
+
+
+      - name: Provision instance(s)
+        ec2:
+          aws_access_key: "{{aws_access_key}}"
+          aws_secret_key: "{{aws_secret_key}}"
+          assign_public_ip: true
+          key_name: "{{ key_name }}"
+          id: "{{ id }}"
+          vpc_subnet_id: "{{ subnet_id }}"
+          group_id: "{{ sec_group }}"
+          image: "{{ image }}"
+          instance_type: t2.micro
+          region: "{{ region }}"
+          wait: true
+	  count: 1
+          instance_tags:
+            Name: eng114_florent_ansible_db
+
+      tags: ['never', 'create_ec2']
+```
