@@ -516,15 +516,15 @@ I will create two playbooks for my node and db playbook
           image: "{{ image }}"
           instance_type: t2.micro
           region: "{{ region }}"
-	  wait: true
+          wait: true
           count: 1
           instance_tags:
             Name: eng114_florent_ansible_node
-
       tags: ['never', 'create_ec2']
 ```
 
-Database playbook
+And this is my database playbook
+
 ```yaml
 ---
 - hosts: localhost
@@ -576,9 +576,8 @@ Database playbook
           instance_type: t2.micro
           region: "{{ region }}"
           wait: true
-	  count: 1
+          count: 1
           instance_tags:
             Name: eng114_florent_ansible_db
-
       tags: ['never', 'create_ec2']
 ```
