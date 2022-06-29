@@ -105,7 +105,7 @@ and my db test playbook is
     assert:
       that: "'mongodb-org' in ansible_facts.packages" # Checks if mongodb is in the machine packages
   - name: Check what port are open on machine # Test Name
-    shell: lsof -i -P -n |s open files, -i is for ips, -P inhibits the conversion of port numbers to port name for network files, -n inhibits the conversion of network numbers to host names for network files. Checks what ports are open and grabs all the lines that have LISTEN in them
+    shell: lsof -i -P -n | grep LISTEN # This is run in the machine. lsof - lists open files, -i is for ips, -P inhibits the conversion of port numbers to port name for network files, -n inhibits the conversion of network numbers to host names for network files. Checks what ports are open and grabs all the lines that have LISTEN in them.
     register: port_check # Sets this as a variable which I can then use later on.
   - name: Check if port 27017 is listening # Test Name
     assert:
