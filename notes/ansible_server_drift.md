@@ -5,7 +5,14 @@
 
 ## Server Drift
 
+What is server drift. **Server Drift**/**Configuration Drift** is where servers in an infrastructure become more and more different as time goes on. So the state of the machine deviates, or drifts, from the baseline due to manual changes and updates.
 
+To combat server drift, two approaches can be taken.
+
+1. Use an automated tool, such as Ansible, and run them frequently and repeatedly to keep machines in line.
+2. Rebuild machine instances frequently so they don't have much time to drift from the baseline
+
+You can combat server drift with Ansible by creating playbooks and running them frequently to detect server drift, then notify the appropriate resource through an email and/or make an appropriate modification to keep it in line with the baseline
 
 ## Ansible Testing
 

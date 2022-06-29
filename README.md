@@ -28,3 +28,5 @@
 - [Jenkins](./notes/jenkins.md)
 
 - [Infrastructure as Code](./notes/IaC.md)
+
+- [Ansible Server Drift](./notes/ansible_server_drift.md)
