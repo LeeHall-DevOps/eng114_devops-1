@@ -95,23 +95,30 @@ and my db test playbook is
   - name: Check timezone
     assert:
       that: "'UTC' in ansible_date_time.tz" # This checks if UTC is the same as the machines timezone
+      
   - name: Check OS # Test name
     assert:
       that: "'Ubuntu' in ansible_distribution" # Checks if the machines operating systems is Ubuntu
+      
   - name: Check if MongoDB is Installed # Test Name
     package_facts:
       manager: "auto" # Gets all the packages from that machine
+      
   - name: Confirm that MongoDB is Installed # Test Name
     assert:
       that: "'mongodb-org' in ansible_facts.packages" # Checks if mongodb is in the machine packages
+      
   - name: Check what port are open on machine # Test Name
     shell: lsof -i -P -n | grep LISTEN # This is run in the machine. lsof - lists open files, -i is for ips, -P inhibits the conversion of port numbers to port name for network files, -n inhibits the conversion of network numbers to host names for network files. Checks what ports are open and grabs all the lines that have LISTEN in them.
     register: port_check # Sets this as a variable which I can then use later on.
+    
   - name: Check if port 27017 is listening # Test Name
     assert:
       that: "'*:27017 (LISTEN)' in port_check.stdout" # Checks if port 27017 is open
+      
   - name: Get service facts # Test name
     service_facts: # Grabs all the services in that machine
+  
   - name: Check if mongo is running
     assert:
       that:
