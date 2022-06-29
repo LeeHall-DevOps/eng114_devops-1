@@ -18,6 +18,13 @@ You can combat server drift with Ansible by creating playbooks and running them 
 
 ## Ansible Testing
 
+These playbooks test if
+
+- the required ports are open
+- it's in the correct timezone
+- the server type
+- Update the machine based on the OS it is
+
 This is the test I have for my app instance
 
 ```yaml
@@ -71,3 +78,34 @@ This is the test I have for my app instance
       msg: "{{ ansible_lsb.description }}"
 ```
 
+and my db test playbook is
+
+```yaml
+---
+
+- name: Assert DB
+  hosts: db
+  become: true
+  gather_facts: true
+  vars:
+    ansible_python_interpreter: /usr/bin/python3
+  tasks:
+  - name: Check timezone
+    assert:
+      that: "'UTC' in ansible_date_time.tz"
+  - name: Check OS
+    assert:
+      that: "'Ubuntu' in ansible_distribution"
+  - name: Check if MongoDB is Installed
+    package_facts:
+      manager: "auto"
+  - name: Confirm that MongoDB is Installed
+    assert:
+      that: "'mongodb-org' in ansible_facts.packages"
+  - name: Check what port are open on machine
+    shell: lsof -i -P -n | grep LISTEN
+    register: port_check
+  - name: Check if port 27017 is listening
+    assert:
+      that: "'*:27017 (LISTEN)' in port_check.stdout"
+```
