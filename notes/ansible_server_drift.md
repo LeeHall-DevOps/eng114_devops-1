@@ -108,4 +108,11 @@ and my db test playbook is
   - name: Check if port 27017 is listening
     assert:
       that: "'*:27017 (LISTEN)' in port_check.stdout"
+  - name: Get service facts
+    service_facts:
+  - name: Check if mongo is running
+    assert:
+      that:
+        - "'{{ansible_facts.services['mongod.service'].state}}' == 'running'"
+      fail_msg: "Mongo is down, please start it or restart"
 ```
