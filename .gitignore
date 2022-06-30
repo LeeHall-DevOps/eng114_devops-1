@@ -12,3 +12,8 @@ sdet/sdet.iml
 .vs
 package-lock.json
 *.log
+.terraform
+.terraform.lock.hcl
+terraform.tfstate
+terraform.tfstate.backup
+main.tf
