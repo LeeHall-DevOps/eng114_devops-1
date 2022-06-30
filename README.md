@@ -30,3 +30,5 @@
 - [Infrastructure as Code](./notes/IaC.md)
 
 - [Ansible Server Drift](./notes/ansible_server_drift.md)
+
+- [Terraform](./notes/terraform.md)
