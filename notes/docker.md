@@ -5,6 +5,7 @@
 - [What is Docker](#what-is-docker)
 - [What is a container](#what-is-a-container)
 - [What is a container image](#what-is-a-container-image)
+- [Containerisation vs Virtualisation](#containerisation-vs-virtualisation)
 - [Docker commands](#docker-commands)
 
 ## What is Docker
@@ -22,6 +23,22 @@ The isolation leverages kernal namespaces cgroups, features that have been in Li
 ## What is a container image
 
 When running a container, it uses an isolated filesystem. This custom filesystem is provided by a `container image`. Since the image contains the container's filesystem, it must contain everything needed to run the application, such as the all dependencies, configuration, scripts, binaries, etc. The image also contains other configuration for the container, such as environment variables, a default command to run, and other metadate.
+
+## Containerisation vs Virtualisation
+
+What is Virtualisation, virtualisation enables you to run multiple operating systems on the hardware of a single physical server.
+
+What is Containerisation, containerisation enables you to deploy multiple applications using the same operating system on a single virtual machine or server.
+
+
+## How to push to Docker
+
+- Pull an image from docker -> `docker pull nginx`
+- Change it
+- Grab the container ID -> `docker ps` and you will see the container IDs
+- Commit the container ID with your docker username and repo -> `docker commit <container-ID> <username>/<repo-name>`
+- Push the container to your docker username and repo -> `docker push <username>/<repo-name>:<tag-if-needed>`
+
 
 ## Docker commands
 
