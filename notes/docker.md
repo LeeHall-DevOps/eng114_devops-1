@@ -3,10 +3,30 @@
 ## Links
 
 - [What is Docker](#what-is-docker)
-
+- [What is a container](#what-is-a-container)
+- [What is a container image](#what-is-a-container-image)
+- [Docker commands](#docker-commands)
 
 ## What is Docker
 
 ![Docker Logo](./images/docker-logo.png)
 
 Docker is a software platform that allows you to build, test, and deploy applications quickly. Docker packages software into standardized units called `containers` that have everything the software needs to run including libraries, system tools, code, and runtime. Using Docker, you can quickly deploy and scale applications into any environment and know your code will run.
+
+## What is a container
+
+A container is a simple another process on you machine that has been isolated from all other processes on the host machine.
+
+The isolation leverages kernal namespaces cgroups, features that have been in Linux for a long time.
+
+## What is a container image
+
+When running a container, it uses an isolated filesystem. This custom filesystem is provided by a `container image`. Since the image contains the container's filesystem, it must contain everything needed to run the application, such as the all dependencies, configuration, scripts, binaries, etc. The image also contains other configuration for the container, such as environment variables, a default command to run, and other metadate.
+
+## Docker commands
+
+All Docker commands start with `docker`
+
+- `Docker build -t docker-image-name .` - This is done after you create a Dockerfile where the package.json is for example. `-t` tags the image. The `.` at the end specifies where to look for the `Dockerfile`
+
+- `Docker run -dp 3000:3000 docker-image-name` - The `-dp` flags run the container in `detached` mode and creating a mapping between the host's port 3000 to the container's port 3000. Without port mapping, we wouldn't be able to access the application.

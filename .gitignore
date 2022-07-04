@@ -16,4 +16,5 @@ package-lock.json
 .terraform.lock.hcl
 terraform.tfstate
 terraform.tfstate.backup
-main.tf
+outputs.tf
+*/variables.tf

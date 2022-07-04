@@ -1,5 +1,5 @@
 variable "infra_env" {
-  type        = string
+  default = "eng114_florent"
   description = "eng114_florent"
 }
 
@@ -27,4 +27,20 @@ variable "private_subnet_numbers" {
     "eu-west-1b" = 5
     "eu-west-1c" = 6
   }
+}
+
+variable "node_ami_id" {
+  default = "ami-065fdae15c0137971"
+}
+
+variable "db_ami_id" {
+  default = "ami-0d6a76c5ccd771a19"
+}
+
+variable "aws_key" {
+  default = "eng114_florent_jr"
+}
+
+variable "ubuntu_ami" {
+  default = "ami-07b63aa1cfd3bc3a5"
 }
