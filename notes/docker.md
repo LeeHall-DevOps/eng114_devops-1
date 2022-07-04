@@ -3,6 +3,7 @@
 ## Links
 
 - [What is Docker](#what-is-docker)
+- [Why use Docker](#why-use-docker)
 - [What is a container](#what-is-a-container)
 - [What is a container image](#what-is-a-container-image)
 - [Containerisation vs Virtualisation](#containerisation-vs-virtualisation)
@@ -13,6 +14,34 @@
 ![Docker Logo](./images/docker-logo.png)
 
 Docker is a software platform that allows you to build, test, and deploy applications quickly. Docker packages software into standardized units called `containers` that have everything the software needs to run including libraries, system tools, code, and runtime. Using Docker, you can quickly deploy and scale applications into any environment and know your code will run.
+
+## Why use Docker
+
+Docker allows you to ship code faster, standardize application operations, seamlessly move code, and save money by improving resource utilization.
+
+With Docker, you get a single that can reliably run anywhere.
+
+Docker's simple and straightforward syntax gives you full control.
+
+Wide adoption means there's a robust ecosystem of tools and off-the-shelf applications that are ready to use with Docker
+
+### Some of the Benefits
+
+#### Ship More Software Faster
+
+Docker users on average ship software 7x more frequently than non-Docker users and Docker enables you to ship isolated services as often as needed.
+
+#### Standardize Operations
+
+Small containerized applications make it easy to deploy, identify issues, and roll back for remediation.
+
+#### Seamlessy Move
+
+Docker-based applications can be seamlessy moved from local development machines to production deployments on AWS.
+
+#### Save Money
+
+Docker containers make it easier to run more code on each server, improving your utilization and saving your money.
 
 ## What is a container
 
