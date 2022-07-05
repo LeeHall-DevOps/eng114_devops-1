@@ -83,6 +83,30 @@ This task was just me hosting a website via Docker Hub
 5. Once I saw my site instead of default nginx, I then committed it to docker - `docker commit <container-id> <username>/<repo-name>:<tag-if-needed>`
 6. Once I've committed, I then pushed it up to Docker Hub - `docker push <username>/<repo-name>:<tag-if-needed>`
 
+### Hosting Node App on Docker
+
+I'm going to host my node app on Docker
+
+1. Pull node docker image - `docker pull node`
+2. Go into your app folder and create a Dockerfile - `cd <app-location> && vim Dockerfile`
+3. In that Dockerfile, you want
+```Dockerfile
+# Select the base image
+FROM node:16
+# Copy over the required files/folders
+WORKDIR /app
+COPY . .
+# Expose the required port
+EXPOSE 3000
+# Run the commands necessary
+RUN npm install
+CMD ["node", "app.js"]
+```
+4. Build the Docker Image - `docker build -t node-app .`
+5. Run the Docker Image - `docker run -dp 3000:3000 node-app`
+
+Then once you see it in the browser then commit the container and push it up to Docker.
+
 ## Docker commands
 
 All Docker commands start with `docker`
