@@ -7,6 +7,7 @@
 - [What is a container](#what-is-a-container)
 - [What is a container image](#what-is-a-container-image)
 - [Containerisation vs Virtualisation](#containerisation-vs-virtualisation)
+- [How to push to Docker](#how-to-push-to-docker)
 - [Docker commands](#docker-commands)
 
 ## What is Docker
