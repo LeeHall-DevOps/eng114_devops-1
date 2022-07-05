@@ -40,6 +40,19 @@ What is Containerisation, containerisation enables you to deploy multiple applic
 - Push the container to your docker username and repo -> `docker push <username>/<repo-name>:<tag-if-needed>`
 
 
+### A quick task I had to do
+
+This task was just me hosting a website via Docker Hub
+
+![Docker Task](./images/docker_task.png)
+
+1. I created a html file on my localhost and made it my own
+2. I then pulled a docker image - `docker pull nginx`
+3. After that, I started the image - `docker run -dp 80:80 nginx`
+4. I copied over the file from my localhost to the docker container - `docker cp index.html <container-id>:/usr/share/nginx/html/`
+5. Once I saw my site instead of default nginx, I then committed it to docker - `docker commit <container-id> <username>/<repo-name>:[tag-if-needed]`
+6. Once I've committed, I then pushed it up to Docker Hub - `docker push <username>/<repo-name:<tag-if-needed>
+
 ## Docker commands
 
 All Docker commands start with `docker`
