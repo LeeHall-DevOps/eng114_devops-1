@@ -80,8 +80,8 @@ This task was just me hosting a website via Docker Hub
 2. I then pulled a docker image - `docker pull nginx`
 3. After that, I started the image - `docker run -dp 80:80 nginx`
 4. I copied over the file from my localhost to the docker container - `docker cp index.html <container-id>:/usr/share/nginx/html/`
-5. Once I saw my site instead of default nginx, I then committed it to docker - `docker commit <container-id> <username>/<repo-name>:[tag-if-needed]`
-6. Once I've committed, I then pushed it up to Docker Hub - `docker push <username>/<repo-name:<tag-if-needed>
+5. Once I saw my site instead of default nginx, I then committed it to docker - `docker commit <container-id> <username>/<repo-name>:<tag-if-needed>`
+6. Once I've committed, I then pushed it up to Docker Hub - `docker push <username>/<repo-name>:<tag-if-needed>`
 
 ## Docker commands
 
