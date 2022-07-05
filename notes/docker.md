@@ -60,7 +60,6 @@ What is Virtualisation, virtualisation enables you to run multiple operating sys
 
 What is Containerisation, containerisation enables you to deploy multiple applications using the same operating system on a single virtual machine or server.
 
-
 ## How to push to Docker
 
 - Pull an image from docker -> `docker pull nginx`
@@ -68,7 +67,6 @@ What is Containerisation, containerisation enables you to deploy multiple applic
 - Grab the container ID -> `docker ps` and you will see the container IDs
 - Commit the container ID with your docker username and repo -> `docker commit <container-ID> <username>/<repo-name>`
 - Push the container to your docker username and repo -> `docker push <username>/<repo-name>:<tag-if-needed>`
-
 
 ### A quick task I had to do
 
@@ -90,6 +88,7 @@ I'm going to host my node app on Docker
 1. Pull node docker image - `docker pull node`
 2. Go into your app folder and create a Dockerfile - `cd <app-location> && vim Dockerfile`
 3. In that Dockerfile, you want
+
 ```Dockerfile
 # Select the base image
 FROM node:16
@@ -102,15 +101,118 @@ EXPOSE 3000
 RUN npm install
 CMD ["node", "app.js"]
 ```
+
 4. Build the Docker Image - `docker build -t node-app .`
 5. Run the Docker Image - `docker run -dp 3000:3000 node-app`
 
 Then once you see it in the browser then commit the container and push it up to Docker.
 
+```Dockerfile
+# Select the base image
+FROM node:16 AS app
+# Copy over the required files/folders
+WORKDIR /app
+# Copy over
+COPY . .
+# Expose the required port
+EXPOSE 3000
+# Run the commands necessary
+RUN npm install
+CMD ["node", "app.js"]
+
+# Multi stage
+# Alpine compresses it by 75%
+FROM node:alpine
+# Creates a work directory
+WORKDIR /usr/src/app
+# Copies over the package.json with all the dependencies
+COPY package*.json ./
+# Copies it from the app container to this docker container
+COPY --from=app /app /usr/src/app
+# Opens the necessary port
+EXPOSE 3000
+# Runs the cmd to start app.js
+CMD ["node", "app.js"]
+```
+
+## What is Docker Compose
+
+Docker Compose is a tool that was developed to help define and share multi-container applications. With Compose, we can create a YAML file to define the services and with a single command, can spin everything up or tear it all down.
+
+A big advantage of using Compose is you can define your application stack in a file, keep it at the root of your project repo, and easily enable someone else to contribute to your project.
+## Connecting two containers together
+
+This is my file structure
+
+```file
+Docker/
+├── app/
+│   ├── app.js
+│   ├── docker-compose.yml
+│   ├── Dockerfile - Frontend
+│   ├── models/
+│   │   └── post.js
+│   ├── package.json
+│   ├── README.md
+│   └── seeds/
+│       └── seed.js
+├── Dockerfile - Backend
+└── mongo.conf.orig
+```
+
+My Dockerfile for the backend looked like this
+
+```Dockerfile
+# Select base image
+FROM mongo
+# Write over mongo file
+COPY mongod.conf.orig /etc/
+# Expose the required ports
+EXPOSE 27017
+```
+
+This allowed me to use the latest mongo image that I changed which made it a lot easier to connect to the db from the app
+
+Then my docker-compose.yml file looked like this
+
+```yaml
+version: "3"
+
+services:
+  # Name of my app
+  website:
+    # Specifies the build configuration for creating container image from source
+    build:
+      # Defines a path or directory containing a Dockerfile, or a url to a git repo
+      context: "."
+    # Sets env variables for the machine
+    environment:
+      #DB_HOST: mongodb://database:27017/posts
+      - DB_HOST=mongodb://database:27017/posts
+    # Expresses startup and shutdown dependencies between services.
+    depends_on:
+      - database
+    # Allows the port to be open to access it on localhost
+    ports:
+      - 3000:3000
+  # Name of my database
+  database:
+    # Grabs the mongo image, the latest one
+    image: mongo
+    # Restarts it just so that any changes made can be saved
+    restart: always
+    build:
+      context: "./.."
+    ports:
+      - 27107:27017
+```
+
 ## Docker commands
 
 All Docker commands start with `docker`
 
-- `Docker build -t docker-image-name .` - This is done after you create a Dockerfile where the package.json is for example. `-t` tags the image. The `.` at the end specifies where to look for the `Dockerfile`
-
-- `Docker run -dp 3000:3000 docker-image-name` - The `-dp` flags run the container in `detached` mode and creating a mapping between the host's port 3000 to the container's port 3000. Without port mapping, we wouldn't be able to access the application.
+- `docker build -t docker-image-name .` - This is done after you create a Dockerfile where the package.json is for example. `-t` tags the image. The `.` at the end specifies where to look for the `Dockerfile`
+- `docker run -dp 3000:3000 docker-image-name` - The `-dp` flags run the container in `detached` mode and creating a mapping between the host's port 3000 to the container's port 3000. Without port mapping, we wouldn't be able to access the application.
+- `docker cp <src> <container-id>:<dest>` - can also be done the other way around, just copies over to either local or docker container.
+- `docker exec -it <container-id> bash` - goes into the container with command line.
+- `docker-compose up` - works if you have a `docker-compose.yml` file in the same directory you are running that command
