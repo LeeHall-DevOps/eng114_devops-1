@@ -6,6 +6,8 @@
 - [Why you need Kubernetes](#why-you-need-kubernetes)
 - [What Kubernetes does](#what-kubernetes-does)
 - [How to install Kubernetes](#how-to-install-kubernetes)
+- [Running a node app](#running-a-node-app)
+- [Running a db](#running-a-db)
 
 ## What is Kubernetes
 

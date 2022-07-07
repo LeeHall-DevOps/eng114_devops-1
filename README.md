@@ -34,3 +34,5 @@
 - [Terraform](./notes/terraform.md)
 
 - [Docker](./notes/docker.md)
+
+- [Kubernetes](./notes/kubernetes.md)
