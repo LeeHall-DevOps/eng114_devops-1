@@ -38,7 +38,7 @@ Kubernetes provides you with
 
 ### Windows
 
-1. Launch Docker Desktop in `Administrator`
+1. Launch Docker Desktop in `Administrator` <br/>
 ![Launch Docker in Admin Mode](./images/docker_launch_admin.png)
 2. Go to `Settings` in the top right
 ![Click Settings in the top right](./images/docker_click_settings.png)
