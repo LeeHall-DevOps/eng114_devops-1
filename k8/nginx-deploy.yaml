@@ -1,0 +1,34 @@
+# K8 is a yml file
+# I am going to create a deployment for my nginx-image
+# I will create 3 pods with this deployment
+# kubectl get name-service - deploy/deployment - service/svc - pods
+# Which version of APIs for deployment - K8 official doc
+
+apiVersion: apps/v1
+
+kind: Deployment # pod, service, replicaset, ASG
+
+# metadata to name your deployment - case insensitive
+metadata:
+  name: nginx
+spec:
+  # labels & selectors are the communication channels between micro-services.
+  selector:
+    matchLabels:
+      app: nginx
+  replicas: 3
+  template:
+    metadata:
+      labels:
+        app: nginx
+    spec:
+      containers:
+        - name: nginx
+          image: lenti/website:v1
+          ports:
+            - containerPort: 80
+          imagePullPolicy: Always
+          resources:
+            limits:
+              memory: 512Mi
+              cpu: "1"

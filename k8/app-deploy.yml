@@ -1,0 +1,28 @@
+apiVersion: apps/v1 # Check kubernetes doc
+kind: Deployment
+metadata:
+  name: node-app
+spec:
+  # labels & selectors are the communication channels between micro-services.
+  replicas: 3
+  selector:
+    matchLabels:
+      app: node-app
+  template:
+    metadata:
+      labels:
+        app: node-app
+    spec:
+      containers:
+      - name: node-app
+        image: lenti/node-app:light
+        resources:
+          limits:
+            memory: "528Mi"
+            cpu: "1"
+        ports:
+        - containerPort: 3000
+        env:
+        - name: DB_HOST
+          value: mongodb://10.102.215.11:27017/posts
+        imagePullPolicy: Always
