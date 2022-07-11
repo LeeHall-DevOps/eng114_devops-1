@@ -1,8 +1,5 @@
 # eng114_devops
 
-
-## Links
-
 - [What is Devops](./notes/devops.md)
 
 - [Setting up Vagrant and virtualBox](./notes/setup.md)
