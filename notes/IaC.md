@@ -47,19 +47,6 @@ Pull Model - Nodes are dynamically updated with the configurations that are pres
 
 Push Model - Centralised server pushes the configuration on the nodes.
 
-## What is Ansible
-
-Ansible is a simple IT automation engine that automates cloud provisioning, configuration management, application deployment, infra-service orchestration, and many other IT needs.
-
-### Benefits
-
-- Free - it is Open-Source.
-- Very simple to set up and use - no need to know a lot of code to use Ansible's playbooks.
-- Powerful - It lets you model even highly complex IT workflows.
-- Flexible - Can orchestrate the entire application environment no matter where it's deployed
-- Agentless - Do not need to install any other software or firewall ports on the client systems you want to automate, also don't need to set up a seperate management structure.
-- Efficient - You do not need to install any extra software, there's more room for application resources on your server.
-
 ## How does IaC - Ansible - Terraform fit into DevOps
 
 IaC is an important part of implementing DevOps practices and continuous intergration/continuous delievery (CICD). IaC takes away the majority of provisioning work from developers, who can execute a script to have their infrastructure ready to go.

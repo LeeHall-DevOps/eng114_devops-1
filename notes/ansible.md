@@ -11,7 +11,16 @@
 
 ## What is Ansible
 
-Ansible is used for provisioning the underlying infrastructure of your environment, virtualized hosts and hypervisors, network devices, and bare metal servers. It can also install services, add compute hosts, and provision resources, services, and applications inside of your cloud.
+Ansible is a simple IT automation engine that automates cloud provisioning, configuration management, application deployment, infra-service orchestration, and many other IT needs.
+
+### Benefits
+
+- Free - it is Open-Source.
+- Very simple to set up and use - no need to know a lot of code to use Ansible's playbooks.
+- Powerful - It lets you model even highly complex IT workflows.
+- Flexible - Can orchestrate the entire application environment no matter where it's deployed
+- Agentless - Do not need to install any other software or firewall ports on the client systems you want to automate, also don't need to set up a seperate management structure.
+- Efficient - You do not need to install any extra software, there's more room for application resources on your server.
 
 ## Setting up Ansible
 
