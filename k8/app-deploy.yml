@@ -22,7 +22,7 @@ spec:
             cpu: "1"
         ports:
         - containerPort: 3000
-        env:
-        - name: DB_HOST
-          value: mongodb://10.102.215.11:27017/posts
+        # env:
+        # - name: DB_HOST
+          # value: mongodb://10.102.215.11:27017/posts
         imagePullPolicy: Always
