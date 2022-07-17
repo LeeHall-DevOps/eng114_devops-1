@@ -77,5 +77,5 @@ Reasons why NACLs are used over Security groups
 
 ## How to create a VPC
 
-![](./images/vpc-diagram.png)
+![VPC](./images/vpc-diagram.png)
 
